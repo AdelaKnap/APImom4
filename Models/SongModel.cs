@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace APImom4.Models;
 
@@ -20,5 +21,6 @@ public class SongModel
     public int? CategoryId { get; set; }
 
     // Modellen för category
+    [JsonIgnore] // För att inte skapa en loop
     public CategoryModel? Category { get; set; }
 }

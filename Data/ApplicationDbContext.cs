@@ -10,6 +10,16 @@ public class ApplicationDbContext : DbContext
     }
 
     // Tabellerna i databasen
-    public DbSet<SongModel>? Songs { get; set; }
-    public DbSet<CategoryModel>? Categories { get; set; }
+    public DbSet<SongModel> Songs { get; set; }
+    public DbSet<CategoryModel> Categories { get; set; }
+
+    // Inställningar för relationerna mellan tabellerna
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SongModel>()
+            .HasOne(s => s.Category)                // En sång har en kategori
+            .WithMany(c => c.Songs)                 // En kategori har många sånger    
+            .HasForeignKey(s => s.CategoryId)       // FK     
+            .IsRequired(true);                      // Required  CategoryId i SongModel
+    }
 }
