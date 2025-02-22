@@ -1,0 +1,6 @@
+@APImom4_HostAddress = http://localhost:5004
+
+GET {{APImom4_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
